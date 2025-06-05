@@ -17,13 +17,6 @@ pipeline {
             }
         }
 
-        stage('Checkout') {
-            steps {
-                echo '🔄 Cloning repository...'
-                sh 'git clone https://github.com/lxthxrgx/java .'
-            }
-        }
-
         stage('Build') {
             steps {
                 echo '🏗️ Building project...'
