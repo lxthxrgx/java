@@ -47,8 +47,10 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo '🐳 Building Docker image inside Minikube Docker environment...'
-                sh 'eval $(minikube -p minikube docker-env)'
-                sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
+                sh '''
+                    eval $(minikube -p minikube docker-env)
+                    docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
+                '''
             }
         }
 
