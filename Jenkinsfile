@@ -5,7 +5,8 @@ pipeline {
         JAVA_HOME = "/opt/java/jdk-24"
         PATH = "${JAVA_HOME}/bin:${PATH}"
         IMAGE_NAME = "spring-app"
-        IMAGE_TAG = "latest" 
+        IMAGE_TAG = "latest"
+        DOCKER_HUB_CREDENTIALS = 'docker-hub-credentials'  // Имя Jenkins credentials для Docker Hub
     }
 
     stages {
@@ -44,13 +45,15 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Docker Build & Push') {
             steps {
-                echo '🐳 Building Docker image inside Minikube Docker environment...'
-                sh '''
-                    eval $(minikube -p minikube docker-env)
-                    docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
-                '''
+                script {
+                    echo '🐳 Building and pushing Docker image to Docker Hub...'
+                    def dockerImage = docker.build("${IMAGE_NAME}:${IMAGE_TAG}")
+                    docker.withRegistry('https://index.docker.io/v1/', "${DOCKER_HUB_CREDENTIALS}") {
+                        dockerImage.push()
+                    }
+                }
             }
         }
 
