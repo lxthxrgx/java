@@ -38,15 +38,10 @@ pipeline {
             }
         }
 
-        stage('Docker Build & Push') {
+        stage('Docker Build (local)') {
             steps {
-                script {
-                    echo '🐳 Building and pushing Docker image to Docker Hub...'
-                    def dockerImage = docker.build("${IMAGE_NAME}:${IMAGE_TAG}")
-                    docker.withRegistry('https://index.docker.io/v1/', "${DOCKER_HUB_CREDENTIALS}") {
-                        dockerImage.push()
-                    }
-                }
+                echo '🐳 Building Docker image locally for Minikube...'
+                sh 'docker build -t spring-app:latest .'
             }
         }
 
