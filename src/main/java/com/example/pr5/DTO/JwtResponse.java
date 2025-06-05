@@ -49,4 +49,23 @@ public class JwtResponse {
         this.accessToken = accessToken;
     }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
 }
