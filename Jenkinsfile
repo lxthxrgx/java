@@ -1,14 +1,14 @@
 pipeline {
     agent any
 
-    stage('Check Java') {
-        steps {
-            sh 'java -version'
-            sh 'echo $JAVA_HOME'
-        }
-}
-
     stages {
+        stage('Check Java') {
+            steps {
+                sh 'java -version'
+                sh 'echo $JAVA_HOME'
+            }
+        }
+
         stage('Checkout') {
             steps {
                 echo '🔄 Cloning repository...'
