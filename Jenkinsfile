@@ -20,7 +20,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo '🔄 Cloning repository...'
-                checkout scm
+                sh 'git clone https://github.com/lxthxrgx/java .'
             }
         }
 
