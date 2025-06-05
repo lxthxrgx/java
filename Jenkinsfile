@@ -41,14 +41,32 @@ pipeline {
                 sh './mvnw package -DskipTests'
             }
         }
+
+        stage('Build Docker Image') {
+            steps {
+                echo '🐳 Building Docker image inside Minikube Docker environment...'
+                sh 'eval $(minikube -p minikube docker-env)'
+                sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
+            }
+        }
+
+        stage('Deploy to Minikube') {
+            steps {
+                echo '🚀 Deploying app to Minikube...'
+                sh '''
+                    kubectl apply -f k8s/deployment.yaml
+                    kubectl apply -f k8s/service.yaml
+                '''
+            }
+        }
     }
 
     post {
         success {
-            echo '✅ Build pipeline completed successfully!'
+            echo '✅ Build and deploy pipeline completed successfully!'
         }
         failure {
-            echo '❌ Build pipeline failed.'
+            echo '❌ Build or deploy pipeline failed.'
         }
     }
 }
