@@ -6,7 +6,8 @@ pipeline {
         PATH = "${JAVA_HOME}/bin:${PATH}"
         IMAGE_NAME = "spring-app"
         IMAGE_TAG = "latest"
-        DOCKER_HUB_CREDENTIALS = 'docker-hub-credentials'  // Имя Jenkins credentials для Docker Hub
+        DOCKER_HUB_CREDENTIALS = 'docker-hub-credentials'
+        KUBECONFIG = "/var/jenkins_home/kubeconfig/config"
     }
 
     stages {
