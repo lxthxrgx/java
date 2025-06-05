@@ -1,10 +1,12 @@
 pipeline {
     agent any
 
-    environment {
-        JAVA_HOME = tool name: 'JDK 24', type: 'jdk'
-        PATH = "${JAVA_HOME}/bin:${env.PATH}"
-    }
+    stage('Check Java') {
+        steps {
+            sh 'java -version'
+            sh 'echo $JAVA_HOME'
+        }
+}
 
     stages {
         stage('Checkout') {
