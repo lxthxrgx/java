@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        JAVA_HOME = "/opt/java/jdk-24"
+        PATH = "${JAVA_HOME}/bin:${PATH}"
+    }
+
     stages {
         stage('Check Java') {
             steps {
