@@ -7,7 +7,7 @@ pipeline {
         IMAGE_NAME = "spring-app"
         IMAGE_TAG = "latest"
         DOCKER_HUB_CREDENTIALS = 'docker-hub-credentials'
-        KUBECONFIG = "/var/jenkins_home/kubeconfig/config"
+        KUBECONFIG = "/root/.kube/config"
     }
 
     stages {
@@ -38,6 +38,22 @@ pipeline {
                 sh './mvnw package -DskipTests'
             }
         }
+
+        stage('Debug K8s') {
+            steps {
+                sh '''
+                echo "Current Kube context:"
+                kubectl config current-context || echo "No context found"
+                
+                echo "Cluster info:"
+                kubectl cluster-info || echo "Cannot connect"
+
+                echo "Nodes:"
+                kubectl get nodes || echo "No nodes"
+                '''
+            }
+        }
+
 
         stage('Docker Build (local)') {
             steps {
