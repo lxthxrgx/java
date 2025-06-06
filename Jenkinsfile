@@ -6,7 +6,7 @@ pipeline {
         PATH = "${JAVA_HOME}/bin:${PATH}"
         IMAGE_NAME = "spring-app"
         IMAGE_TAG = "latest"
-        KUBECONFIG = "/root/.kube/config"
+        KUBECONFIG = "/var/jenkins_home/.kube/config"
     }
 
     stages {
@@ -74,6 +74,19 @@ pipeline {
                 sh 'kubectl get nodes'
             }
         }
+
+        stage('Debug Kubeconfig') {
+            steps {
+                sh '''
+                echo "Current user:"
+                whoami
+                echo "KUBECONFIG: $KUBECONFIG"
+                ls -l $KUBECONFIG
+                cat $KUBECONFIG
+                '''
+            }
+        }
+
 
         stage('Deploy to Minikube') {
             steps {
