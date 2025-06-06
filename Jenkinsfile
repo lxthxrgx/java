@@ -68,6 +68,13 @@ pipeline {
             }
         }
 
+        stage('Check Minikube Access') {
+            steps {
+                sh 'kubectl config current-context'
+                sh 'kubectl get nodes'
+            }
+        }
+
         stage('Deploy to Minikube') {
             steps {
                 echo '🚀 Deploying app to Minikube...'
