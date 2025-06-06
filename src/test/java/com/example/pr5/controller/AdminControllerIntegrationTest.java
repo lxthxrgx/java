@@ -22,7 +22,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.test.web.servlet.MvcResult;
 
-@SpringBootTest(properties = "spring.profiles.active=test")
 @AutoConfigureMockMvc
 public class AdminControllerIntegrationTest {
 
