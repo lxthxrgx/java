@@ -24,10 +24,17 @@ pipeline {
             }
         }
 
+        // stage('Test') {
+        //     steps {
+        //         echo '🧪 Running tests...'
+        //         sh './mvnw test'
+        //     }
+        // }
+
         stage('Test') {
             steps {
-                echo '🧪 Running tests...'
-                sh './mvnw test'
+                echo '🧪 Running tests with test profile and H2...'
+                sh './mvnw test -Dspring.profiles.active=test'
             }
         }
 
