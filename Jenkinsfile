@@ -34,7 +34,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo '🧪 Running tests with test profile and H2...'
-                sh './mvnw test -Dspring.profiles.active=test'
+                sh './mvnw test -Dspring.profiles.active=test -Ddebug'
             }
         }
 
