@@ -22,9 +22,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.test.web.servlet.MvcResult;
 
+@SpringBootTest
 @AutoConfigureMockMvc
 public class AdminControllerIntegrationTest {
-
     @Autowired private MockMvc mockMvc;
     @Autowired private UserRepository userRepo;
     @Autowired private RoleRepository roleRepo;
