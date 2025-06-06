@@ -6,7 +6,6 @@ pipeline {
         PATH = "${JAVA_HOME}/bin:${PATH}"
         IMAGE_NAME = "spring-app"
         IMAGE_TAG = "latest"
-        DOCKER_HUB_CREDENTIALS = 'docker-hub-credentials'
         KUBECONFIG = "/root/.kube/config"
     }
 
