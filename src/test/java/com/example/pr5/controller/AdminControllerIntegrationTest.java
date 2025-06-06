@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Set;
@@ -26,6 +27,14 @@ import org.springframework.test.web.servlet.MvcResult;
 @SpringBootTest
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
+@TestPropertySource(properties = {
+    "spring.datasource.url=jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1",
+    "spring.datasource.driverClassName=org.h2.Driver",
+    "spring.datasource.username=sa",
+    "spring.datasource.password=",
+    "spring.jpa.hibernate.ddl-auto=create-drop",
+    "spring.jpa.database-platform=org.hibernate.dialect.H2Dialect"
+})
 public class AdminControllerIntegrationTest {
     @Autowired private MockMvc mockMvc;
     @Autowired private UserRepository userRepo;
